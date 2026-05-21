@@ -39,6 +39,7 @@ void DeleteAllPendingOrders();
 //+------------------------------------------------------------------+
 int OnInit()
 {
+   // Reset flag setiap reload
    targetReached = false;
    
    // Setup trade object for fast execution
@@ -69,6 +70,7 @@ int OnInit()
    Print("Remaining: ", TargetEquity - currentEquity);
    Print("AutoTrading: ENABLED");
    Print("Async Mode: ENABLED");
+   Print("Status: RESET - Ready to monitor");
    
    return(INIT_SUCCEEDED);
 }
@@ -109,12 +111,16 @@ void CheckTargetReached()
       string message = StringFormat("TARGET TERCAPAI! Equity: %.2f / Target: %.2f", 
                                    currentEquity, TargetEquity);
       Print(message);
-      Alert(message);
       
+      // Close all positions first
       CloseAllPositions();
       DeleteAllPendingOrders();
+      
+      // Set flag after closing
       targetReached = true;
       
+      // Show alert after execution completed
+      Alert(message);
       Print("Semua posisi dan pending order telah ditutup.");
    }
 }
