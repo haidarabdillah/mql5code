@@ -12,7 +12,7 @@
 
 //--- Input Parameters
 input group "=== Target Settings ==="
-input double TargetEquity = 230.0;          // Target Equity
+input double TargetEquity = 30000.0;          // Target Equity
 
 input group "=== Display Settings ==="
 input bool   ShowPanel = true;              // Tampilkan Info Panel
